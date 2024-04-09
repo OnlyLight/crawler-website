@@ -5,10 +5,12 @@ concurrency:
   group: ${{ github.workflow }}-${{ github.ref || github.run_id }}
   cancel-in-progress: true
 
-on:
-  pull_request:
-    branches:
-      - "main"
+on: workflow_dispatch
+
+# on:
+#   pull_request:
+#     branches:
+#       - "main"
 
 permissions:
   contents: write
@@ -32,7 +34,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@v5
         with:
-          images: 080196/crawler-website
+          images: onlylight291998/website-app
           tags: |
             type=raw,value={{date 'YYYY-MM-DD'}}
 

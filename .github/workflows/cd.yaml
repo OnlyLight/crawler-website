@@ -5,10 +5,12 @@ concurrency:
   group: ${{ github.workflow }}-${{ github.ref || github.run_id }}
   cancel-in-progress: true
 
-on:
-  push:
-    branches:
-      - "main"
+on: workflow_dispatch
+
+# on:
+#   push:
+#     branches:
+#       - "main"
 
 permissions:
   contents: write
@@ -26,7 +28,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@v5
         with:
-          images: 080196/crawler-website
+          images: onlylight291998/website-app
           tags: |
             type=raw,value={{date 'YYYY-MM-DD'}}
 
@@ -39,7 +41,7 @@ jobs:
           port: 22
           script: |
             cd /home/ubuntu/crawler-demo
-            sh deploy.sh 080196/crawler-website ${{ steps.meta.outputs.tags }}
+            sh deploy.sh onlylight291998/website-app ${{ steps.meta.outputs.tags }}
 
       # - name: Setup SSH
       #   run: |
